@@ -1,0 +1,17 @@
+<div class="tag_contener">
+  <%= form_for @photo, :html => { :method => :put } do |f| %>
+    <div class="tag_options">
+      <%= f.label :id, "Wybór zdjęcia" %>
+      <%= f.select :id, @photos.collect { |p| [p.file_name.last(11), p.id] } %>
+      <input type="text" id="fake_photoL" class="fake_photoL"/>
+      <div class="fake_photoR"></div>
+    </div><br/>
+    <div class="tag_options">
+      <%= f.label :tag_names, "Edycja tagów" %>
+      <%= f.text_field :tag_names %>
+    </div>
+    <div class="tag_submit">
+      <%= f.submit "Zapisz", :class => 'tag_submit' %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,55 @@
+<% @concepts.each do |concept| %>
+  <div style="color:#bfcafe; font-size: 15px; background: #505050">
+    <p style="margin: 2px 5px 2px 5px;width: 120px; float: left; padding: 0">
+      concept_id =
+      <%= concept.id %>
+    </p>
+    <p style="margin: 2px 5px 2px 5px; width: 200px; float: left; padding: 0">
+      concept_extent &darr;<br/>
+      (photos_id) =
+      <span style="background:#424242;padding: 0 3px 0 3px;">
+        <%= concept.concept_extent %>
+      </span>
+    </p>
+    <p style="margin: 2px 0 2px 5px; width: 440px; float: left; padding: 0">
+      concept_intent &darr; (tags_id) =
+      <%= concept.concept_intent %><br/>
+      tags =
+      <span style="background:#424242;padding: 0 3px 0 3px;">
+        <%= identify_tag_names(concept.concept_intent) %>
+      </span>
+    </p>
+    <div class="clear_fixed"></div>
+  </div>
+  <div style=" color:#cacaca; font-size: 13px; border-bottom: 1px solid slategrey; background: #7c7c7c">
+    <% concept.edges.each do |edge| %>
+      <p style="margin: 1px 5px 1px 5px;width: 100px; float: left; padding: 0;">
+        edge_id =
+        <%= edge.id %>
+      </p>
+      <p style="margin: 1px 5px 1px 5px; width: 180px; float: left; padding: 0">
+        edge_extent &darr;<br/>
+        (photo_id) =
+        <span style="background: #686868; padding: 0 3px 0 3px;">
+          <%= edge.edge_extent %>
+        </span>
+      </p>
+      <p style="margin: 1px 0 1px 5px; width: 400px; float: left; padding: 0;">
+        edge_intent &darr; (tag_id) =
+        <%= edge.edge_intent %><br/>
+        tags = 
+        <span style="background: #686868; padding: 0 3px 0 3px;">
+          <%= identify_tag_names(edge.edge_intent) %>
+        </span>
+      </p>
+      <p style="margin: 1px 0 1px 0; width: 110px; float: left; padding: 0;">
+        concept_id =
+        <%= edge.concept_id %>
+      </p>
+      <div class="clear_fixed"></div>
+    <% end %>
+  </div>
+<% end %>
+<%= will_paginate @concepts, :previous_label => '&#8810; Poprzednia',
+                                                 :next_label => 'Nast&#281;pna &#8811;',
+                                                 :class => 'photopagin' %>

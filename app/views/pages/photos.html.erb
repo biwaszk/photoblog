@@ -1,0 +1,36 @@
+<p class="page_header">
+  Foto galeria
+</p>
+<div class="gallery_contenerL">
+  <div class="gallery_actions">
+    Opcje sortowania :
+    <%  if params[:sort] == "desc" || params[:sort].nil? %>
+    <span class="sort_disabled">Data dodania malejąco &#x25BC</span>
+    <% else %>
+      <%= link_to "Data dodania malejąco \u25BC", {:controller => "pages", :action=> "photos", :sort => "desc"}, :class => "sort_enable" %>
+    <%  end %>
+    <%  if params[:sort] == "asc" %>
+      <span class="sort_disabled">Data dodania rosnąco &#x25B2;</span>
+    <% else %>
+      <%= link_to "Data dodania rosnąco \u25B2", {:controller => "pages", :action=> "photos", :sort => "asc"}, :class => "sort_enable" %>
+    <% end %>
+  </div>
+  <div class="default_gallery">
+    <% unless @photos_all.nil? %>
+      <%= render :template => 'photos/photos_all' %>
+    <% end %>
+  </div>
+</div>
+<div class="gallery_contenerR">
+  <div class="tags_header">Tagi :</div>
+  <div class="photos_tags">
+    <p class="show_tags">
+      <% unless @tags_all.nil? %>
+        <%= render :template => 'tags/tags_all' %>
+      <% else %>
+        Nie dodano jeszcze tagów.
+      <% end %>
+    </p>
+  </div>
+</div>
+<div class="clear_fixed"></div>

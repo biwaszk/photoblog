@@ -1,0 +1,21 @@
+# == Schema Information
+# Schema version: 20110401153720
+#
+# Table name: lattices
+#
+#  id             :integer(4)      not null, primary key
+#  concept_extent :text
+#  concept_intent :text
+#  created_at     :datetime
+#  updated_at     :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  concept_extent: MyText
+  concept_intent: MyText
+
+two:
+  concept_extent: MyText
+  concept_intent: MyText

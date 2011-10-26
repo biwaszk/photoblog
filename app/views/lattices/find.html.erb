@@ -1,0 +1,49 @@
+<div class="f_photos">
+  <div class="f_info">
+    Rezultaty wyszukiwania dla : <span class="r_color"><%= $rem_tags %></span>
+  </div>
+  <div class="f_show">
+    <%= render :partial => "lattices/find_part" , :collection => @page_results %>
+  </div>
+  <div class="clear_fixed"></div>
+  <%= will_paginate @page_results, :previous_label => '&#8810; Poprzednia',
+                                                        :next_label => 'Nast&#281;pna &#8811;',
+                                                        :class => 'photopagin' %>
+</div>
+
+<div class="result_cont">
+  <div class="neighbours">
+    <p class="neighbour_desc">Powiązane wyniki&nbsp; <span class="r_color">( rezultaty poszerzone )</span></p>
+    <div class="f_results">
+      <div class="in_frs">
+        <% @upper_neighbours = upper_neighbours($rem_cpt) %>
+        <% @upper_tags = identify_tags(@upper_neighbours) %>
+        <% if @upper_tags.empty? %>
+          <div class="f_notice">Brak dodatkowych wyników.</div>
+        <% else %>
+          <% if @upper_tags[0][1].nil? %>
+            <%= link_to "#{@upper_tags[0][0].to_s}", {:controller => "lattices", :action=> "find", :tagi => "#{@upper_tags[0][0].to_s}"}, :class => "find_link" %>
+          <% else %>
+            <% @upper_tags.each do |name| %>
+              <%= link_to "#{name.join(" , ")}", {:controller => "lattices", :action=> "find", :tagi => "#{name.join(" ")}"}, :class => "find_link" %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="n_sep"></div>
+  <div class="neighbours">
+    <p class="neighbour_desc">Powiązane wyniki&nbsp; <span class="r_color">( rezultaty zawężone )</span></p>
+    <div class="f_results">
+      <div class="in_frs">
+        <% @lower_neighbours = lower_neighbours($rem_cpt) %>
+        <% @lower_tags = identify_tags(@lower_neighbours) %>
+        <% @lower_tags.each do |name| %>
+          <%= link_to "#{name.join(" , ")}", {:controller => "lattices", :action=> "find", :tagi => "#{name.join(" ")}"}, :class => "find_link" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="clear_fixed"></div>
+</div>

@@ -1,0 +1,21 @@
+# == Schema Information
+# Schema version: 20110320192430
+#
+# Table name: contexts
+#
+#  id         :integer(4)      not null, primary key
+#  photo_id   :integer(4)
+#  tag_id     :integer(4)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  photo_id: 1
+  tag_id: 1
+
+two:
+  photo_id: 1
+  tag_id: 1

@@ -1,0 +1,45 @@
+<div class="header">
+  <div class="banner">
+    <%= link_to logo, root_path %>
+  </div>
+  <div class="nav">
+    <div class="nav_top">
+      <% if signed_in? %>
+      <p class="signin">
+        Użytkownik : <span class="user_signed"><%= current_user.name %></span> | <%= link_to "Wyloguj",  wyloguj_path, :method => :delete %>
+      </p>
+      <% else %>
+      <div class="login_form">
+        <%= form_for(:session, :url => sessions_path) do |f| %>
+          <%= f.text_field :email, :value => " email" %>
+          <%= f.password_field :password, :type => "text", :value => " has\u0142o", :size => 32 %>
+          <%= f.submit "Zaloguj" %>
+        <% end %>
+      </div>
+      <%  end %>
+    </div>
+    <div class="nav_bottom">
+      <div class="menu">
+        <%= link_to "Home", root_path %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+        <%= link_to "Foto", foto_path %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+        <% if signed_in? %>
+          <%= link_to "Moje Foto", current_user %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <%= link_to "Moje Dane", edit_user_path(current_user) %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+          <%= link_to "Użytkownicy", users_path %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+        <% else %>
+          <%= link_to "Rejestracja", rejestracja_path %>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;
+        <%  end %>
+        <span class="look_for">
+        <%= form_tag(:controller => "lattices", :action => "find", :method => "get") do%>
+          <%= text_field_tag(:tagi) %>
+          <%= submit_tag("", :class=>"main_search") %>
+        <% end %>
+        </span>
+      </div>
+      <div id="auto_complite"></div>
+    </div>
+  </div>
+  <% flash.each do |key, value| %>
+    <%= content_tag(:div, content_tag(:p, value, :class => "finfo"), :class=> "flash_#{key}") %>
+  <% end %>
+</div>

@@ -1,0 +1,9 @@
+<%  if params[:sort] == tag_all.id.to_s %>
+  <span class="tags_disable">
+    <%= "#{tag_all.name}(#{Tag.find(tag_all.id).photos.count})" %>
+  </span>
+<% else %>
+  <%= link_to "#{tag_all.name}(#{Tag.find(tag_all.id).photos.count})",
+            {:controller => "pages", :action=> "photos", :sort => tag_all.id }, :class => "tags_links" %>
+<% end %>
+

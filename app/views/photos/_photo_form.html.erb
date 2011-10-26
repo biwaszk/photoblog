@@ -1,0 +1,8 @@
+<div class="add_photo">
+  <div class="button_add"></div>
+  <input type="text" id="fname" class="field_add" />
+  <%= form_for @photo, :html => {:multipart => true } do |f| %>
+    <%= f.file_field :upload %>
+    <%= f.submit "Zapisz" %>
+  <% end %>
+</div>

@@ -1,0 +1,8 @@
+<%= will_paginate @photos_all, :previous_label => '&#8810; Poprzednia',
+                                                 :next_label => 'Nast&#281;pna &#8811;',
+                                                 :class => 'photopagin' %>
+  <%= render :partial => "photos/photo_all" , :collection => @photos_all %>
+  <div class="clear_fixed"></div>
+<%= will_paginate @photos_all, :previous_label => '&#8810; Poprzednia',
+                                                 :next_label => 'Nast&#281;pna &#8811;',
+                                                 :class => 'photopagin' %>

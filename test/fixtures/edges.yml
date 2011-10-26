@@ -1,0 +1,24 @@
+# == Schema Information
+# Schema version: 20110401153720
+#
+# Table name: edges
+#
+#  id          :integer(4)      not null, primary key
+#  edge_extent :text
+#  edge_intent :text
+#  concept_id  :integer(4)
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  edge_extent: MyText
+  edge_intent: MyText
+  concept_id: 1
+
+two:
+  edge_extent: MyText
+  edge_intent: MyText
+  concept_id: 1

@@ -1,0 +1,20 @@
+<div class="one_phCont3" id="oph_<%= find_part.id %>">
+  <div class="photo_desc2" id="phd_<%= find_part.id %>">
+    <p class="photo_info2">
+      Dodał : <%= find_part.user.name %><br />
+      Data : <%= find_part.created_at.to_date() %><br />
+    </p>
+    <div class="photo_tags2">
+      <p class="in_photo_tags">
+        <% if find_part.tags.empty? %>
+          <%= 'Nie dodano jeszcze tagów' %>
+        <% else %>
+          <%= find_part.tags.map(&:name).sort.join(" ") %>
+        <% end %>
+      </p>
+    </div>
+    <%= link_to "", "/users_photos/#{ find_part.file_name }", :class => "save_photo2", :target => '_blank' %>
+  </div>
+  <%= image_tag("/users_photos/#{ find_part.file_name }", :alt => "#{find_part.file_name}",
+                                                                                     :class => "photo_f") %>
+</div>

@@ -1,0 +1,27 @@
+<div class="users_left">
+<p class="page_header">Użytkownicy</p>
+  <%= will_paginate :previous_label => '&#8810; Poprzednia', :next_label => 'Nast&#281;pna &#8811;' %>
+  <% @users.each do |user| %>
+    <div class="user_contener">
+        <%= image_tag("user.png", :class => "user_icon") %>
+        <%= link_to user.name, user, :class => "user_link" %>
+        <% if current_user.admin? && user.name != current_user.name %>
+          <%= link_to "Usu\u0144", user, :method => :delete, :confirm => "Czy jeste\u015B pewny ?",
+                                                    :title => "Delete #{user.name}", :class => "delete_user" %>
+        <% end %>
+     </div>
+  <% end %>
+  <%= will_paginate :previous_label => '&#8810; Poprzednia', :next_label => 'Nast&#281;pna &#8811;' %>
+</div>
+<div class="in_usep"></div>
+<div class="users_right">
+<p class="page_header_s">Szukaj</p>
+  <div class="find_users">
+    <%= form_tag(:controller => "users", :action => "search", :method => "get") do%>
+      <%= label_tag(:name, "Alias :") %>&nbsp;
+      <%= text_field_tag(:name) %>
+      <%= submit_tag("Szukaj", :class=>"fuser_sbm") %>
+    <% end %>
+  </div>
+</div>
+<div class="clear_fixed"></div>

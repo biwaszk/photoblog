@@ -1,0 +1,25 @@
+<p class="page_header">Rejestracja</p>
+<div class="register_page">
+<%= form_for (@user) do |f| %>
+  <%= render 'shared/error_messages', :object => f.object %>
+  <div class="field">
+    <%= f.label :name, "Alias" %><br />
+    <%= f.text_field :name %><span class="field_desc">* minimum 5 znaków, maksymalnie 20 znaków</span>
+  </div>
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %><span class="field_desc">*</span>
+  </div>
+  <div class="field">
+    <%= f.label :password, "Hasło" %><br />
+    <%= f.password_field :password %><span class="field_desc">* minimum 8 znaków, maksymalnie 32 znaki</span>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation, "Potwierdzenie hasła" %><br />
+    <%= f.password_field :password_confirmation %><span class="field_desc">*</span>
+  </div>
+  <div class="actions">
+    <%= f.submit "Zarejestruj" %>
+  </div>
+<% end %>
+</div>

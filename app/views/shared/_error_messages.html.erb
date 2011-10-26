@@ -1,0 +1,24 @@
+<% if object.errors.any? %>
+  <div class="print_errors">
+    <p class="error_header">
+      <%= if object.errors.count ==1 then "Proszę poprawić następujący błąd" else "Proszę poprawić natępujące błędy:" end %>
+    </p>
+    <ul class="error_contener">
+    <% object.errors.full_messages.each do |msg| %>
+      <li class="error_line">
+        <% errors_pl = {"Name can't" => "Alias nie może być pusty !", "Name is" =>"Alias nie spełnia wymogów długości !",
+                                  "Email can't"=>"Email nie może być pusty !", "Email is" => "Nieprawidłowy format adresu email !",
+                                  "Password can't" => "Hasło nie może być puste !", "Password is" => "Hasło nie spełnia wymogów długości !",
+                                  "Email has already" => "Podany adres Email jest już w bazie !", "Name has already" => "Podany Alias jest juz zarezerwowany !",
+                                  "Password doesn't match" => "Hasło nie zgadza się z potwierdzeniem !"
+        } %>
+        <%  errors_pl.each do |key, value| %>
+          <%=  if msg.match(key) then msg=value end%>
+        <% end %>
+      </li>
+    <% end %>
+    </ul>
+  </div>
+<%else%>
+  <div class="field_desc">Wszystkie pola oznaczone (*) są obowiązkowe</div>
+<%end%>

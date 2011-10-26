@@ -1,0 +1,20 @@
+<div class="one_phCont2" id="oph_<%= photo_all.id %>">
+  <div class="photo_desc2" id="phd_<%= photo_all.id %>">
+    <p class="photo_info2">
+      Dodał : <%= photo_all.user.name %><br />
+      Data : <%= photo_all.created_at.to_date() %><br />
+    </p>
+    <div class="photo_tags2">
+      <p class="in_photo_tags">
+        <% if photo_all.tags.empty? %>
+          <%= 'Nie dodano jeszcze tagów' %>
+        <% else %>
+          <%= photo_all.tags.map(&:name).sort.join(" ") %>
+        <% end %>
+      </p>
+    </div>
+    <%= link_to "", "/users_photos/#{ photo_all.file_name }", :class => "save_photo2", :target => '_blank' %>
+  </div>
+  <%= image_tag("/users_photos/#{ photo_all.file_name }", :alt => "#{photo_all.file_name}",
+                                                                                     :class => "photo") %>
+</div>

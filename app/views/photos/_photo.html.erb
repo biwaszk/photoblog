@@ -1,0 +1,29 @@
+<div class="one_phCont" id="oph_<%= photo.id%>">
+  <div class="photo_desc" id="phd_<%= photo.id%>">
+    <p class="photo_info">
+      Nazwa : <%= photo.file_name.last(11) %><br />
+      Dodano : <%= photo.created_at.to_date() %><br />
+    </p>
+    <div class="photo_tags">
+      <p class="in_photo_tags">
+        <% if photo.tags.empty? %>
+          <%= 'Nie dodano jeszcze tagów' %>
+        <% else %>
+          <%= photo.tags.map(&:name).sort.join(" ") %>
+        <% end %>
+      </p>
+    </div>
+    <% user = photo.user rescue User.find(photo.user_id) %>
+    <% if current_user?(user) %>
+      <%= link_to "", photo, :method => :delete, :confirm => "Czy jeste\u015B pewny ?", :class => "del_photo" %>
+    <% elsif !current_user.nil? && current_user.admin?%>
+      <%= link_to "", photo, :method => :delete, :confirm => "Czy jeste\u015B pewny ?", :class => "del_photo" %>
+      <%= link_to "", "/users_photos/#{ photo.file_name }", :class => "save_photo", :target => '_blank' %>
+    <% else %>
+      <%= link_to "", "/users_photos/#{ photo.file_name }", :class => "save_photo2", :target => '_blank' %>
+    <% end %>
+  </div>
+  <%= image_tag("/users_photos/#{ photo.file_name }", :alt => "#{photo.file_name}",
+                                                                                     :class => "photo") %>
+  <div class="tag_link" id="tag_link"></div>
+</div>

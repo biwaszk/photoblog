@@ -1,0 +1,41 @@
+<div class="home_Cleft">
+  <p class="page_header">
+    Witamy na naszym repozytorium fotografii
+  </p>
+  <p class="main_Tdesc">
+    &nbsp;Ostatnio dodane zdjęcie
+    <span class="added_at">
+      <% unless @last_photo.nil? %>
+      godzina <%= @last_photo.created_at.to_s.at(11..15) %>
+      <% end %>
+    </span>
+  </p>
+  <div class="main_frame">
+    <% unless @last_photo.nil? %>
+      <%= image_tag("/users_photos/#{ @last_photo.file_name }", :class => "main_photo") %>
+    <% end %>
+  </div>
+  <p class="main_Bdesc">
+    <% unless @last_photo.nil? %>
+      <%= link_to "~ #{@last_photo.user.name} ",  user_path(@last_photo.user.id) %>
+    <% end %>
+  </p>
+</div>
+<div class="home_Cright">
+  <img alt="quote" src="/images/home_quote.png" class="home_quote"/>
+  <p class="home_desc">
+   &nbsp;&nbsp;Aplikacja jest przykładem serwisu pełniącego
+   funkcję repozytorium fotografii ( ang. <i>photoblog</i> ).<br/>
+   Zdjęcia opisywane są przy pomocy słów kluczowych ( ang. <i>tag</i> ).<br/>
+   &nbsp;&nbsp;Program został napisany przy użyciu frameworka
+   Ruby on Rails służącego do szybkiego i efektywnego tworzenia aplikacji internetowych.
+  </p>
+  <p class="home_desc">
+   &nbsp;&nbsp;Celem pracy było zaprezentowanie możliwości Formalnej Analizy Pojęć
+   do wpomagania nawigacji po serwisach internetowych.<br/>
+   &nbsp;&nbsp;Program wykorzystuje generowaną dla bieżącej zawartości serwisu kratę pojęciową.
+  Istotnym elementem było dostosowanie i implementacja algorytmu służącego do grupowania
+  dokumentów oraz wspomagania ich wyszukiwania.
+  </p>
+</div>
+<div class="clear_fixed"></div>

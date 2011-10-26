@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <%= csrf_meta_tag %>
+    <%= javascript_include_tag "prototype", "scriptaculous", "rails", "application" %>
+    <%= render 'layouts/stylesheets' %>
+  </head>
+  <body>
+    <div class="page">
+      <%= render 'layouts/header' %>
+      <div class="content">
+        <div class="main_content">
+          <%= yield %>
+        </div>
+      </div>
+      <%= render 'layouts/footer' %>
+      <%#= debug(params) if Rails.env.development? %>
+    </div>
+  </body>
+</html>

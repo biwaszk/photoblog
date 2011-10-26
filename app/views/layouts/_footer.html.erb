@@ -1,0 +1,17 @@
+<div class="footer">
+  &bull;&nbsp;
+  <%= link_to "home", root_path %>
+  <span class="spacer"></span>&bull;&nbsp;
+  <%= link_to "foto", foto_path %>
+  <% if signed_in? %>
+  <span class="spacer"></span>&bull;&nbsp;
+  <%= link_to "moje foto", current_user %>
+  <span class="spacer"></span>&bull;&nbsp;
+  <%= link_to "moje dane", edit_user_path(current_user) %>
+  <span class="spacer"></span>&bull;&nbsp;
+  <%= link_to "użytkownicy", users_path %>
+  <% else %>
+  <span class="spacer"></span>&bull;&nbsp;
+  <%= link_to "rejestracja", rejestracja_path %>
+  <% end %>
+</div>

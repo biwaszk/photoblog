@@ -1,0 +1,21 @@
+# == Schema Information
+# Schema version: 20110401162835
+#
+# Table name: flags
+#
+#  id         :integer(4)      not null, primary key
+#  flag_name  :string(255)
+#  flag_value :boolean(1)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  flag_name: MyString
+  flag_value: false
+
+two:
+  flag_name: MyString
+  flag_value: false

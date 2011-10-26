@@ -1,0 +1,40 @@
+<p class="page_header">
+  Strona użytkownika&nbsp;
+  <span class="user_show"><%= @user.name %></span>
+  <span class="short_info">liczba zdjęć : <%= @user.photos.count %></span>
+</p>
+<% if current_user?(@user) %>
+<div class="users_actions">
+  <div class="in_users_actions">
+    <p class="actions_desc">Dodawanie zdjęć</p>
+    <%= render 'photos/photo_form' %>
+  </div>
+  <div class="iua_vsep">&nbsp;</div>
+  <div class="in_users_actions">
+    <p class="actions_desc">Zarządzanie tagami</p>
+    <%= render 'photos/photo_tag_form' %>
+    <p class="tag_desc">
+      * Tagi mogą zawierać wyłącznie litery i cyfry,<br/>
+      &nbsp;&nbsp;&nbsp;należy je oddzielać przecinkiem.<br/>
+      * Użycie spacji nie jest dozwolone.<br/>
+      * Dopuszczalny znak to ( - )
+    </p>
+  </div>
+  <div class="clear_fixed"></div>
+</div>
+<% else %>
+  <div class="vertical_sep"></div>
+<% end %>
+<div class="user_photos" id="up_container">
+  <% unless @user.photos.empty? %>
+    <%= will_paginate @photos ,:previous_label => '&#8810; Poprzednia',
+                                                 :next_label => 'Nast&#281;pna &#8811;',
+                                                 :class => 'photopagin' %>
+    <!-- wyswietlanie zdjec w kontrolerze users poprzez partial z widoku photos -->
+      <%= render @photos %>
+    <div class="clear_fixed"></div>
+    <%= will_paginate @photos ,:previous_label => '&#8810; Poprzednia',
+                                                 :next_label => 'Nast&#281;pna &#8811;',
+                                                 :class => 'photopagin' %>
+  <% end %>
+</div>

@@ -1,0 +1,128 @@
+<div class="autocomplite">
+  <ul id="auto_list">
+    <% auto.each do |tag| %>
+      <% if tag.empty? %>
+        <li class="no_result">Brak wyników</li>
+      <% else %>
+        <% tag.each_index  do |i| %>
+          <li class="find_tag" id="<%= "find_tag_#{i}" %>">
+            <%= tag[i].name  %>
+          </li>
+        <% end %>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+<script type="text/javascript">
+
+  // mouse events
+  $$('#auto_list > li').invoke('observe', 'click', function(e) {
+    if ((this.innerHTML.trim()) != "Brak wyników"){
+      if (checkPresence (this.innerHTML.trim())) {
+        current_value = current_value.without(this.innerHTML.trim());
+      }
+      else {
+        current_value.push(this.innerHTML.trim());
+      }
+      $('tagi').setValue(current_value.join(' '));
+    }
+    $('tagi').focus();
+  });
+  $$('#auto_list > li').invoke('observe', 'mouseover', function(e) {
+    if ((this.innerHTML.trim()) != "Brak wyników"){
+      this.addClassName('find_tag_active');
+    }
+  });
+  $$('#auto_list > li').invoke('observe', 'mouseout', function(e) {
+    this.removeClassName('find_tag_active');
+  });
+
+  // keyboard events
+  var tag;
+  
+  Event.observe('tagi', 'keypress', function(event) {
+    var key=event.which || event.keyCode;
+    var check_value; var check_tag;
+    var first_tag; var last_tag;
+    
+    switch (key) {
+      case 40:  // arrow down
+        check_tag = Object.inspect(tag);
+        check_value = $('tagi').getValue();
+        first_tag = $$('#auto_list > li').first();
+        last_tag = $$('#auto_list > li').last();
+
+        if (check_value=='' || check_value.match(/^[ +]/)) {
+          Event.stop(event);
+        }
+        else if ((last_tag.innerHTML.trim())=='Brak wyników' || (first_tag.innerHTML.trim())=='Brak wyników') {
+          Event.stopObserving('tagi');
+        }
+        else if (check_tag=='undefined') {
+          tag = first_tag.addClassName('find_tag_active');
+        }
+        else if (tag==last_tag) {
+          tag.removeClassName('find_tag_active');
+          tag = first_tag.addClassName('find_tag_active');
+        }
+        else {
+          tag.removeClassName('find_tag_active');
+          tag = tag.next().addClassName('find_tag_active');
+        }
+      break;
+        
+      case 38:  //arrow up
+        check_tag = Object.inspect(tag);
+        check_value = $('tagi').getValue();
+        first_tag = $$('#auto_list > li').first();
+        last_tag = $$('#auto_list > li').last();
+        
+        if (check_value=='' || check_value.match(/^[ +]/)) {
+          Event.stop(event);
+        }
+        else if ((last_tag.innerHTML.trim())=='Brak wyników' || (first_tag.innerHTML.trim())=='Brak wyników') {
+          Event.stopObserving('tagi');
+        }
+        else if (check_tag=='undefined') {
+          tag = last_tag.addClassName('find_tag_active');
+        }
+        else if (tag==first_tag) {
+          tag.removeClassName('find_tag_active');
+          tag = last_tag.addClassName('find_tag_active');
+        }
+        else {
+          tag.removeClassName('find_tag_active');
+          tag = tag.previous().addClassName('find_tag_active');
+        }
+      break;
+
+      case 39:  // arrow left
+        if ((tag.innerHTML.trim()) != 'Brak wyników') {
+          Event.stopObserving('tagi');
+          if (checkPresence (tag.innerHTML.trim())) {
+            current_value = current_value.without(tag.innerHTML.trim());
+          }
+          else {
+            current_value.push(tag.innerHTML.trim());
+          }
+          $('tagi').setValue(current_value.join(' '));
+        }        
+      break;
+
+      default:
+        return false;
+      break;
+    }
+  });
+
+  // sprawdz czy tag zostal juz wybrany
+  function checkPresence (val) {
+    var result = false;
+    for (i=0; i<current_value.length; i++) {
+      if (current_value[i]==val) { result = true; }
+    }
+    return result;
+  }
+
+</script>
