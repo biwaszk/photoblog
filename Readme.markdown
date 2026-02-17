@@ -1,6 +1,6 @@
-### Thesis title: Application of Formal Concept Analysis to support navigation on websites.
+### Thesis title: Using Formal Concept Analysis to improve website navigation.
 
-The main objective was to implement FCA algorithms for the construction of concept lattice and    
-searching for photos based on the lattice structure.
+The main objective was to implement FCA algorithms in order to construct a concept lattice and 
+enable the "search for image" functionality based on the lattice structure.
 
-More about [*Formal Concept Analysis*](http://www.upriss.org.uk/fca/fca.html).
+More about [*Formal Concept Analysis*](https://upriss.github.io/fca/fca.html).
